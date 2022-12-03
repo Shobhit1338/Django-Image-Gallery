@@ -12,32 +12,30 @@
 
 </head>
 
-<body class="m-5">
+<body style="background-color:#C0EEE4;" class="m-5">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-6">
-                <div class="row justify-content-center">
-                    <div class="col-10">
+                <div class="card p-2 row justify-content-center">
+                    <div class="col-12">
                         <img style="max-width: 100%; max-height: 100%;" src="{{photo.image.url}}">
                     </div>
                     <div class="row mt-4">
                     </div>
-                    <blockquote class="blockquote row">
+                    <div class="blockquote row">
                         <p class="blockquote card text-center col-6"><strong>Title : {{photo.title}}</strong></p>
                         <p class="blockquote card text-center col-6"><strong>Category : {{photo.category.name}}</strong></p>
                         <p class="blockquote card text-center col-12"><strong>Description : {{photo.description}}</strong></p>
-                    </blockquote>
-                    <br>
-                    <div class="row justify-content-center">
-                        <form method="POST" action="{% url 'delete' photo.id %}">
-                            <!-- Security token by Django -->
-                            {% csrf_token %}
-
-                            <input class="col-4 btn btn-dark my-3 mt-3" type="submit" value="Delete" />
-                            <a href="{% url 'gallery' %}" class="col-4 btn btn-dark my-3 mt-3">Go Back</a>
-                        </form>
                     </div>
-                    
+                    <br>
+                    <form class="row justify-content-center" method="POST" action="{% url 'delete' photo.id %}">
+                        <!-- Security token by Django -->
+                        {% csrf_token %}
+
+                        <input style="background-color:#924446" class="col-4 btn btn-dark my-3 mt-3" type="submit" value="Delete" />
+                        <div class="col-2"></div>
+                        <a href="{% url 'gallery' %}" class="col-4 btn btn-dark my-3 mt-3">Go Back</a>
+                    </form>                
                 </div>
             </div>
         </div>
