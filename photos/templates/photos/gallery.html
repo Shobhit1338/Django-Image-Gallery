@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery</title>
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <style>
+        .image-thumbail {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .list-group-item a {
+            text-decoration: none;
+            color: black;
+            cursor:pointer;
+        }
+        li:hover{
+            background-color:#e5e5e5;
+        }
+    </style>
+</head>
+
+<body class="m-5">
+
+    <div class="container">
+        <div class="row">
+            <div>
+                <h2 class="display-1 text-center"><strong>Dashboard</strong></h2>
+            </div>
+
+            <div class="col-md-3">
+                {% if request.user.is_authenticated %}
+                <p>Hello {{request.user}}</p>
+                {% endif %}
+                <div class="card">
+                    <div class="card-header">
+                        Categories
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <a href="{% url 'gallery' %}">All</a>
+                        </li>
+                        {% for category in categories %}
+                        
+                        <li class="list-group-item">
+                            <a href="{% url 'gallery' %}?category={{category.name}}">
+                                {{category.name}}
+                            </a>
+                        </li>
+                        {% endfor %}
+
+
+                        <a href="{% url 'add' %}" class="btn btn-dark btn-block btn-sm m-1">Add Photo</a>
+                        <a href="{% url 'logout' %}" class="btn btn-dark btn-block btn-sm m-1">Logout</a>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+
+                    {% for photo in photos %}
+                    <div class="col-md-3">
+                        <div class="card my-2">
+                            <img class="image-thumbail p-1" src="{{photo.image.url}}" alt="{{photo.title}}">
+
+                            <div class="card-body">
+                                <h6 class="text-center">Title: {{photo.title}}</h6>
+                            </div>
+                            <a href="{% url 'photo' photo.id %}" class="btn btn-outline-dark btn-sm m-1">View</a>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <h3>Nothing to Show..</h3>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
