@@ -30,7 +30,7 @@
         <div class="login--wrapper">
 
             {% if page == 'login' %}
-            <form method='post' class="form">
+            <form method='post' class="form card shadow p-3">
                 {% csrf_token %}
                 <h1>Login</h1>
                 <h3>Login to Access your Gallery</h3>
@@ -45,10 +45,11 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary">Submit</button>
-                <h4>New User?<a href="{% url 'register' %}">Register</a></h4>
+                <br>
+                <h4>New User? <a href="{% url 'register' %}"> Register</a></h4>
             </form>
             {% else %}
-            <form method='post'>
+            <form method='post' class="form card shadow p-3">
                 <h1>Register</h1>
                 {% csrf_token %}
                 {% for field in form %}
@@ -58,7 +59,8 @@
                 </div>
                 {% endfor %}
                 <button type="submit" class="btn btn-primary">Submit</button>
-                <p>Already have an account?<a href="{% url 'login' %}">Login</a></p>
+                <br>
+                <h4>Already have an account?<a href="{% url 'login' %}">Login</a></h4>
 
             </form>
             {% endif %}
